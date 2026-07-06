@@ -1,11 +1,11 @@
 import { createAction, createReducer } from "@reduxjs/toolkit";
 
-type AccountState = {
+export type AccountState = {
   balance: number;
   stars: number;
 };
 
-const accountReducer = createReducer(
+export const accountReducer = createReducer(
   { balance: 0, stars: 0 } as AccountState,
   (builder) => {
     builder
@@ -32,5 +32,3 @@ const accountReducer = createReducer(
       );
   }
 );
-
-export default accountReducer;

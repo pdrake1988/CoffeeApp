@@ -9,6 +9,7 @@ const schema = a
       address: a.string(),
       zipCode: a.string(),
       state: a.string(),
+      city: a.string(),
       country: a.string(),
       balance: a.float(),
       stars: a.integer(),
@@ -24,21 +25,26 @@ const schema = a
       store: a.hasMany("StoreProducts", "productId"),
       orders: a.hasMany("ProductOrders", "productId"),
     }),
+    //Join table for many-to-many relationship between Store and Product
     StoreProducts: a.model({
       storeId: a.id().required(),
       productId: a.id().required(),
+      quantity: a.integer(),
       store: a.belongsTo("Store", "storeId"),
       product: a.belongsTo("Product", "productId"),
     }),
+    //Model represents a store
     Store: a.model({
       name: a.string(),
       address: a.string(),
       zipCode: a.string(),
       state: a.string(),
+      city: a.string(),
       country: a.string(),
       orders: a.hasMany("Orders", "storeId"),
       inventory: a.hasMany("StoreProducts", "storeId"),
     }),
+    //Model represents many-to-many relationship between Orders and Products
     ProductOrders: a.model({
       productId: a.id().required(),
       orderId: a.id().required(),
@@ -46,6 +52,7 @@ const schema = a
       products: a.belongsTo("Product", "productId"),
       orders: a.belongsTo("Orders", "orderId"),
     }),
+    //Model represents an order
     Orders: a.model({
       storeId: a.id().required(),
       accountId: a.id().required(),
@@ -54,6 +61,7 @@ const schema = a
       products: a.hasMany("ProductOrders", "orderId"),
     }),
   })
+  //Requires users to be authenticated
   .authorization((allow) => [allow.authenticated()]);
 
 export type Schema = ClientSchema<typeof schema>;

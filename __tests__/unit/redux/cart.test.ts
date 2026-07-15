@@ -1,6 +1,6 @@
 import { describe, test } from "@jest/globals";
-import { cartReducer } from "../../src/redux/cart.ts";
-import { Product } from "../../src/redux/types.ts";
+import { cartReducer } from "../../../src/redux/cart.ts";
+import { Product } from "../../../src/redux/types.ts";
 
 describe("Tests for the cart reducer", () => {
   const products = () => {

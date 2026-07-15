@@ -1,5 +1,5 @@
 import { describe, expect, test } from "@jest/globals";
-import { accountReducer } from "../../src/redux/account.ts";
+import { accountReducer } from "../../../src/redux/account.ts";
 
 describe("Tests account reducer", () => {
   test("Adds funds to account balance", () => {

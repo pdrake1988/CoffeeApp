@@ -6,16 +6,20 @@ export type AccountState = {
 };
 
 export const accountReducer = createReducer(
-  { balance: 0, stars: 0 } as AccountState,
+  {
+    balance: 0,
+    stars: 0,
+  } as AccountState,
   (builder) => {
     builder
       .addCase(createAction<{ funds: number }>("addFunds"), (state, action) => {
         state.balance += action.payload.funds;
       })
       .addCase(
-        createAction<{ funds: number }>("removeFunds"),
+        createAction<{ funds: number; amount: number }>("removeFunds"),
         (state, action) => {
           state.balance -= action.payload.funds;
+          state.stars -= action.payload.amount;
         }
       )
       .addCase(
